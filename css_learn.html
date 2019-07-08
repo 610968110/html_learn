@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>css</title>
+    <link rel="stylesheet" href="./css/main.css" type="text/css">
+    <style type="text/css">
+        h1 {
+            font-size: 40px;
+            color: aqua;
+            font-family: '方正喵呜体';
+            /* 倾斜 */
+            font-style: italic;
+            /* 行高 */
+            line-height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>标签选择器->内部引用css</h1>
+    <div>标签选择器->外部引用css</div>
+    <div style="font-size: 15px; color:blue">标签选择器->直接写css</div>
+    <div style="color:aqua">
+        标签选择器->我是<em style="font-style: italic;color:brown;font-weight: bold" ;>富文本</em>
+    </div>
+
+    <div>
+        <style>
+            #div1 {
+                color: brown
+            }
+        </style>
+        <div id="div1">id选择器</div>
+    </div>
+
+    <div>
+        <style>
+            .green {
+                color: green
+            }
+
+            .bigSize {
+                font-size: 40px
+            }
+        </style>
+        <div class="green big">类选择器</div>
+    </div>
+
+    <div>
+        <style>
+            .green1 span {
+                color: green
+            }
+
+            .green1 em {
+                font-size: 35px;
+                text-decoration: underline;
+            }
+        </style>
+        <div class="green1">类选择器-><span>层级选择<em>器1</em></span></div>
+    </div>
+
+    <div>
+        <style>
+            .green1 .span2 {
+                color: pink;
+            }
+        </style>
+        <div class="green1">类选择器-><span>层级选择<span class="span2">器2</span></span></div>
+    </div>
+
+    <div>
+        <style>
+            .box1,
+            .box2 {
+                color: pink;
+            }
+
+            .box1 {
+                font-size: 40px;
+            }
+
+            .box2 {
+                font-size: 20px;
+            }
+        </style>
+        <div class="box1">组选择器</div>
+        <div class="box2">组选择器</div>
+    </div>
+
+    <div>
+        <style>
+            .link {
+                color: gold;
+            }
+
+            .link:hover {
+                color: teal;
+                font-weight: bold;
+            }
+        </style>
+        <div class="link">伪类选择器，鼠标悬停变色示例</div>
+    </div>
+
+    <div>
+        <style>
+            .link1 {
+                color: gold;
+            }
+
+            .link1::before {
+                content: "我是";
+                color: red;
+            }
+
+            .link1::after {
+                content: "，啦啦啦";
+                color: bisque;
+            }
+        </style>
+        <div class="link1">伪元素选择器</div>
+    </div>
+
+    <div>
+        <style>
+            .box11 {
+                color: pink;
+                border: 2px;
+                background-color: rgb(71, 165, 42);
+                width: 100px;
+                height: 100px;
+                text-align: center;
+                border-style: solid;
+                border-color: blue;
+                padding: 10px;
+                /* 左右居中 */
+                margin: auto;
+            }
+        </style>
+        <div class="box11">盒子约束</div>
+    </div>
+
+    <div>
+        <style>
+            .boxx {
+                width: 300px;
+                height: 300px;
+                margin: auto;
+                /* 外部盒子加个边框能解决 */
+                /* border: 1px solid black; */
+                /* 隐藏溢出可以解决 */
+                /* overflow: hidden; */
+                background-color: aqua
+            }
+
+            .boxx1 {
+                width: 200px;
+                height: 100px;
+                margin-top: 100px;
+                background-color: blueviolet;
+            }
+
+            /* 第三种解决方案 */
+            .fix::before {
+                content: "";
+                display: table;
+            }
+        </style>
+
+        <div>解决margin塌陷</div>
+        <div class="boxx fix">
+            <div class="boxx1"></div>
+        </div>
+
+    </div>
+
+    <div>
+        <style>
+            .box111 {
+                width: 500px;
+                height: 50px;
+                font-size: 0px;
+                margin: 20px auto;
+            }
+
+            .box111 a {
+                border: 1px solid gold;
+                width: 100px;
+                height: 50px;
+                /* 内联块，能让宽高等生效 
+                    * 内联块横向，块元素纵向
+                    */
+                display: inline-block;
+                color: brown;
+                margin-left: -1px;
+                font-size: 16px;
+                text-align: center;
+                line-height: px;
+            }
+        </style>
+        <div class="box111">
+            <a href="#">我是内联块</a>
+            <a href="#">我是内联块</a>
+            <a href="#">我是内联块</a>
+            <a href="#">我是内联块</a>
+        </div>
+
+    </div>
+
+    <div>
+        <style>
+            .link11 {
+                width: 50px;
+                height: 50px;
+                background-color: aqua;
+                display: block;
+            }
+
+            .link11:hover {
+                background-color: aquamarine;
+                /* display: none; */
+                opacity: 0;
+            }
+        </style>
+        <div style="width: 50px; height: 50px;margin:20px auto;">
+            <div class="link11"></div>
+        </div>
+    </div>
+
+    <div>
+        <style>
+            /* 国际通用写法 既能解决浮动，又能解决margin塌陷，还能兼容IE(IE不认after和before)*/
+            .clearFix::after .clearFix::before {
+                content: "";
+                display: table;
+            }
+
+            .clearFix::after {
+                clear: both;
+            }
+
+            .clearFix {
+                zoom: 1;
+            }
+
+            /* 结束 */
+
+            .clearFuDong {
+                width: 164px;
+                list-style: none;
+                border: 1px solid black;
+                /* 清除浮动1 */
+                /* overflow: hidden; */
+                margin: auto;
+                padding: 0px;
+            }
+
+            .clearFuDong li {
+                width: 50px;
+                height: 50px;
+                background-color: yellow;
+                margin: 2px;
+                /* 变成横向且没有空隙 */
+                float: left;
+                font-size: 12px;
+            }
+        </style>
+        <ul class="clearFuDong clearFix">
+            <li>清除浮动</li>
+            <li>清除浮动</li>
+            <li>清除浮动</li>
+            <li>清除浮动</li>
+            <!-- 清除浮动2 -->
+            <div style="clear: both"></div>
+        </ul>
+    </div>
+
+    <div>
+        <style>
+            .con {
+                width: 450px;
+                height: 150px;
+                border: 1px solid #000;
+                margin: 50px auto 0;
+                overflow: auto;
+            }
+
+            .pic {
+                width: 80px;
+                height: 80px;
+                background-color: gold;
+                float: left;
+                margin: 10px;
+            }
+
+            .pic img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .text {
+                /* background-color:green; */
+                height: 130px;
+                color: #666;
+                text-align: left;
+            }
+        </style>
+        <div class="con">
+            <div class="pic"><img src="./img.png" alt="y"></div>
+            <div class="text">
+                1、浮动元素有左浮动(float:left)和右浮动(float:right)两种
+                2、浮动的元素会向左或向右浮动，碰到父元素边界、其他元素才停下来
+                3、相邻浮动的块元素可以并在一行，超出父级宽度就换行
+                1、浮动元素有左浮动(float:left)和右浮动(float:right)两种
+                2、浮动的元素会向左或向右浮动，碰到父元素边界、其他元素才停下来
+                3、相邻浮动的块元素可以并在一行，超出父级宽度就换行
+            </div>
+        </div>
+    </div>
+
+    <div style="border: 1px solid black; width:100px;height:100px;margin:20px;position:relative;left: 50%">
+        <!-- fixed:相对于浏览器的 absolute:相对于上设置定位的个父级，没有则找body-->
+        <div style="margin: 20px;top:10%;position: absolute;">绝对定位</div>
+    </div>
+
+    <div style="margin-top: 20px;position: relative;">
+        层级越大，在上方
+        <style>
+            .box0 {
+                width: 50px;
+                height: 50px;
+                margin: 0px auto;
+                position: absolute;
+            }
+        </style>
+        <div class="box0" style="background-color: gold; left: 50%;top: 40px;margin-left: 10px"></div>
+        <div class="box0" style="background-color: black; left: 50%;top: 50px;margin-left: 20px"></div>
+        <div class="box0" style="background-color: pink; left: 50%;top: 60px;z-index: 10;margin-left: 30px"></div>
+        <div class="box0" style="background-color: green; left: 50%;top: 70px;margin-left: 40px"></div>
+    </div>
+
+    <div>
+        <style>
+            .imgPosition {
+                width: 150px;
+                height: 150px;
+                border: 5px solid black;
+                margin: 120px auto 0px;
+                background: url(./img.png) 0px 250px;
+            }
+        </style>
+        <div class="imgPosition"></div>
+    </div>
+
+    <div>
+        <input type="search" style="outline: none;" placeholder="获取焦点隐藏边框">
+        <input type="submit" style="cursor: pointer" value="变手">
+    </div>
+
+    <div>
+    </div>
+</body>
+
+</html>

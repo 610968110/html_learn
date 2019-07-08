@@ -1,0 +1,112 @@
+<!-- HTML文档 -->
+<!DOCTYPE html>
+
+<html lang="zh-CH">
+
+<head>
+    <meta charset="utf-8">
+    <title>个人主页</title>
+</head>
+
+<body>
+
+    <div>
+        <h1>一级标题</h1>
+        <h2>二级标题</h2>
+    </div>
+
+    <div>
+        <p>这个标签是段落，自然段哦，-》&nbsp;《-这是空格哦,-》&gt;《-这是大于号哦，-》&lt;《-这是小于号哦,<br />这是换行哦</p>
+        <em>我是倾斜的</em>
+    </div>
+
+    <div>
+        <em>强调词</em><br>
+        <i>专业词</i><br>
+        <b>关键字或产品名</b><br>
+        <strong>非常重要的内容</strong><br>
+    </div>
+
+    <div>
+        <a href="#">回到顶部</a>
+        <!-- target:_self在当前页打开，_blank新开，默认_self -->
+        <a href="html_learn.html" target="_blank">跳转本地网页</a>
+        <!-- title:鼠标悬停时的提示文字 -->
+        <a href="http://www.baidu.com" title="跳转到百度">跳转到百度</a>
+        <a href="http://www.baidu.com"><img src="./img.png" alt="点击图片跳转到百度" width="5%"></a>
+    </div>
+
+    <div>
+        <ol>
+            <li>有序列表1</li>
+            <li>有序列表2</li>
+            <li><a href="http://www.baidu.com">有序列表3</a></li>
+        </ol>
+        <!-- none:去掉小圆点 -->
+        <ul style="list-style: none">
+            <li>无序列表1</li>
+            <li>无序列表2</li>
+            <li><a href="http://www.baidu.com">无序列表3</a></li>
+        </ul>
+    </div>
+
+    <div>
+        <dl>
+            定义列表
+            <dt>html</dt>
+            <dd>前端</dd>
+            <dt>java</dt>
+            <dd>后端</dd>
+        </dl>
+    </div>
+
+    <div>
+        <!-- border:设置边框宽度,align:表格的位置 -->
+        <table border="1" width="300" height="100" align="center" cellpadding="0" cellspacing="0">
+            <!-- cosspan:水平合并n个单元格，rowspan垂直合并 -->
+            <tr>
+                <th colspan="3">我是表头</th>
+            </tr>
+            <tr>
+                <!-- align:内容的水平对齐方式 left right bottom-->
+                <td align="center">1-1</td>
+                <!-- valign:内容的垂直对齐方式  top middle bottom -->
+                <td valign="bottom">1-2</td>
+                <td>1-3</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- action空的代表提交到本地 也网址-->
+    <form action="" method="GET">
+        <!-- for: 绑定id，点击时等于点击id对应标签 -->
+        <label for="name">用户名:</label>
+        <input type="text" name="name" id="name">
+        <br>
+        <input type="radio" name="sex" id="nan" value="0"><label for="nan">男</label>
+        <input type="radio" name="sex" id="nv" value="1"> 女
+        <br>
+        <input type="checkbox" name="like" value="0">打游戏
+        <input type="checkbox" name="like" value="1">被游戏打
+        <br>
+        <input type="file" name="file"> 文件思密达
+        <br>
+        介绍
+        <textarea name="jieshao" id="textarea" cols="30" rows="10"></textarea>
+        <br>
+        籍贯
+        <select name="jiguan" id="select">
+            <option value="beijing">北京</option>
+            <option value="shanghai">上海</option>
+        </select>
+        <br>
+        <input type="submit" id="submit">
+        <input type="image" id="image" src="./img.png" width="2%">
+        <br>
+        <input type="reset" name="reset" id="reset">
+    </form>
+
+
+</body>
+
+</html>

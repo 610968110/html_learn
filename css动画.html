@@ -1,0 +1,159 @@
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css动画</title>
+</head>
+
+<body>
+
+    <div>
+        <style>
+            @keyframes moving {
+                form {
+                    height: 50px;
+                }
+
+                to {
+                    height: 150px;
+                }
+            }
+
+            .box {
+                width: 100px;
+                height: 50px;
+                background-color: brown;
+                /* infinite:一直重复，alternate:结束后反向运动,forwards:结束后停留最后一帧 */
+                /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+                animation: moving 1000ms ease 0ms infinite alternate forwards;
+            }
+
+            .box:hover {
+                animation-play-state: paused;
+            }
+        </style>
+
+        <div class="box"></div>
+
+    </div>
+
+    <div>
+        <style>
+            @keyframes rotating {
+                form {
+                    transform: rotate(0deg)
+                }
+
+                to {
+                    transform: rotate(360deg)
+                }
+            }
+
+            .box1 {
+                width: 100px;
+                height: 100px;
+                background-color: brown;
+                /* ease:缓冲(非线性运动),*/
+                /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+                animation: rotating 1s linear 0ms infinite normal none;
+            }
+
+            .box1:hover {
+                animation-play-state: paused;
+            }
+        </style>
+        <img class="box1" src="./img.png"></img>
+    </div>
+
+    <div>
+        <style>
+            .progress {
+                width: 300px;
+                height: 158px;
+                border: 1px solid black;
+                text-align: center;
+            }
+
+            .progress div {
+                width: 30px;
+                height: 100px;
+                margin: 15px;
+                border-radius: 15px;
+                float: left;
+                animation: progressAnimation 500ms ease 0ms infinite alternate none;
+            }
+
+            .progress p {
+                font-size: 14px;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .progress div:nth-child(1) {
+                background-color: red;
+                animation-delay: 100ms;
+            }
+
+            .progress div:nth-child(2) {
+                background-color: pink;
+                animation-delay: 200ms;
+            }
+
+            .progress div:nth-child(3) {
+                background-color: gold;
+                animation-delay: 300ms;
+            }
+
+            .progress div:nth-child(4) {
+                background-color: green;
+                animation-delay: 400ms;
+            }
+
+            .progress div:nth-child(5) {
+                background-color: blueviolet;
+                animation-delay: 500ms;
+            }
+
+            @keyframes progressAnimation {
+                form {
+                    transform: scale(1, 1)
+                }
+
+                to {
+                    transform: scale(1, 0.3)
+                }
+            }
+        </style>
+        <div class="progress">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <p>loading...</p>
+        </div>
+    </div>
+
+    <div>
+        <style>
+            .long {
+                width: 200px;
+                height: 100px;
+                background-color: gold;
+                transition: width 500ms ease 2ms, height 500ms ease 2ms, background-color 500ms ease 2ms;
+            }
+
+            .long:hover {
+                width: 1000px;
+                height: 50px;
+                background-color: aqua;
+            }
+        </style>
+        <div class="long">快点我</div>
+    </div>
+
+</body>
+
+</html>

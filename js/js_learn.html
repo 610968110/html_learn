@@ -1,0 +1,332 @@
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js</title>
+
+    <style>
+        div {
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <script>
+            function getDate() {
+                document.getElementById("btn_date").innerHTML = new Date();
+            }
+        </script>
+        <button id="btn_date" onclick="getDate()">显示日期</button>
+    </div>
+
+    <div>
+        <script>
+            function addH1() {
+                document.write("<h1>这是一个标题</h1>");
+                document.write("<p>这是一个段落。</p>");
+            }
+        </script>
+        <button onclick="addH1()">addH1</button>
+    </div>
+
+    <div>
+        <button onclick="alert('欢迎')">弹窗</button>
+    </div>
+
+    <div>
+        <script>
+            function changeImg() {
+                view = document.getElementById('changeImg')
+                view.src = view.src.match('img1') ? "../img.png" : "../img1.png";
+            }
+        </script>
+        <div>点我变图片</div>
+        <img id="changeImg" src="../img.png" alt="图片" width="80px" height="80px" onclick="changeImg()">
+    </div>
+
+    <div>
+        <script>
+            var i = 0;
+            function changeColor(view) {
+                if (i % 2 == 0) {
+                    view.style.color = '#00ff00'
+                } else {
+                    view.style.color = '#00ffff'
+                }
+                i++;
+            }
+        </script>
+        <div id="changeColor" onclick="changeColor(this)" style="cursor: pointer">点我变颜色</div>
+    </div>
+
+    <div>
+        <p>请输入数字。如果输入值不是数字，浏览器会弹出提示框。</p>
+        <input id="inputNum" type="text">
+        <script>
+            function isNum() {
+                var x = document.getElementById("inputNum").value;
+                // typeof 可以获取类型
+                if (x == "" || isNaN(x)) {
+                    alert(x + " 不是数字");
+                }
+            }
+        </script>
+        <button type="button" onclick="isNum()">点击这里</button>
+    </div>
+
+    <!--
+        使用 window.alert() 弹出警告框。
+        使用 document.write() 方法将内容写到 HTML 文档中。
+        使用 innerHTML 写入到 HTML 元素。
+        使用 console.log() 写入到浏览器的控制台。 
+
+        onchange	HTML 元素改变
+        onclick	用户点击 HTML 元素
+        onmouseover	用户在一个HTML元素上移动鼠标
+        onmouseout	用户从一个HTML元素上移开鼠标
+        onkeydown	用户按下键盘按键
+        onload	浏览器已完成页面的加载
+    -->
+
+    <div>
+        <p>创建 JavaScript 对象。</p>
+        <p id="demo"></p>
+        <script>
+            // 键必须是String，键值不能使null
+            var person = {
+                firstName: "John",
+                age: 50,
+                eyeColor: "blue",
+                like: function () { return "跑步" }
+            };
+            document.getElementById("demo").innerHTML =
+                person.firstName + " 现在 " + person.age + " 岁. 喜欢 " + person.like();
+        </script>
+    </div>
+
+    <div>
+        <style>
+            .num {
+                font-size: 12px;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+            }
+        </style>
+        <table border="1px" cellpadding="0" cellspacing="0" align="center">
+            <tr>
+                <td colspan="5" id="screen" height="50">0</td>
+            </tr>
+            <tr>
+                <td class="num">0</td>
+                <td class="num">.</td>
+                <td id="clear" colspan="3" align="center">C</td>
+            </tr>
+            <tr>
+                <td class="num">1</td>
+                <td class="num">2</td>
+                <td class="num">3</td>
+                <td class="num">+</td>
+                <td class="num">-</td>
+            </tr>
+            <tr>
+                <td class="num">4</td>
+                <td class="num">5</td>
+                <td class="num">6</td>
+                <td class="num">*</td>
+                <td class="num">/</td>
+            </tr>
+            <tr>
+                <td class="num">7</td>
+                <td class="num">8</td>
+                <td class="num">9</td>
+                <td id="result" colspan="2" align="center">=</td>
+            </tr>
+        </table>
+        <script>
+            var screen = document.getElementById("screen")
+            var result = document.getElementById("result")
+            var clear = document.getElementById("clear")
+            var num = document.getElementsByClassName("num")
+            var run = 0
+
+            clear.onclick = function () {
+                screen.innerHTML = run = 0
+            }
+
+            result.onclick = function () {
+                screen.innerHTML = run = eval(run)
+            }
+
+            for (let i = 0; i < num.length; i++) {
+                num[i].onclick = function () {
+                    console.info(i)
+                    if (run == 0) run = ""
+                    run += num[i].innerHTML
+                    screen.innerHTML = run
+                }
+            }
+
+        </script>
+    </div>
+
+    <div>
+        <script>
+            // 开启js的严格模式，浏览器调试可以看到错误
+            // "use strict";
+            function change(view) {
+                var str = view.innerHTML;
+                var txt = str.replace(/正则表达式/i, "正则表达式示例");
+                view.innerHTML = txt
+            }
+            x = 5
+        </script>
+        <div onclick="change(this)" style="cursor: pointer">这是正则表达式,点我替换文本</div>
+    </div>
+
+    <div>
+        <script>
+            function up() {
+                // view = document.getElementById('name1')
+                // name = view.value
+                name = document.forms["name1"].value;
+                if (name == null || name == "") {
+                    alert("姓名不能为空")
+                    return false
+                }
+            }
+        </script>
+        提交表单,不满足需求不上传
+        <form action="" onsubmit="return up()">
+            <!-- 也可以加上这个属性，空的时候不上传 required="required" -->
+            姓名：<input id="name1" type="text" name="name" required="required" pattern="[a-zA-Z]+">
+            <input type="submit" value="上传啦">
+        </form>
+    </div>
+
+    <div>
+        <!-- 
+        约束验证 HTML 输入属性
+
+        disabled	规定输入的元素不可用
+        max	        规定输入元素的最大值
+        min	        规定输入元素的最小值
+        pattern	    规定输入元素值的正则表达式
+        required	规定输入元素字段是必需的
+        type 	    规定输入元素的类型
+
+        validity	布尔属性值，返回 input 输入值是否合法
+        validationMessage	浏览器错误提示信息
+        willValidate	指定 input 是否需要验证
+        -->
+
+        <!-- 
+        示例  document.getElementById("id1").validity.rangeOverflow
+        
+        customError	设置为 true, 如果设置了自定义的 validity 信息。
+        patternMismatch	设置为 true, 如果元素的值不匹配它的模式属性。
+        rangeOverflow	设置为 true, 如果元素的值大于设置的最大值。
+        rangeUnderflow	设置为 true, 如果元素的值小于它的最小值。
+        stepMismatch	设置为 true, 如果元素的值不是按照规定的 step 属性设置。
+        tooLong	设置为 true, 如果元素的值超过了 maxLength 属性设置的长度。
+        typeMismatch	设置为 true, 如果元素的值不是预期相匹配的类型。
+        valueMissing	设置为 true，如果元素 (required 属性) 没有值。
+        valid	设置为 true，如果元素的值是合法的。 
+        -->
+        <script>
+            function check() {
+                var age = document.getElementById("age");
+                if (age.checkValidity() == false) {
+                    // validationMessage 存着自动的错误信息,可以通过setCustomValidity去设置
+                    alert(age.validationMessage)
+                }
+            }
+        </script>
+        验证表单,不满足需求弹框显示
+        <form action="">
+            年龄：<input id="age" type="number" name="age" max="100" min="0" required>
+            <button onclick="check()">验证</button>
+        </form>
+    </div>
+
+    <div>
+        <a href="javascript:void(0)">javascript:void(0),单此处什么也不会发生</a>
+        <a href="javascript:void(alert('Warning!!!'))">javascript:void(alert('Warning!!!'))点我!</a>
+    </div>
+
+    <!-- 
+        if (y === undefined) {
+          y = 0;
+        }
+        等价于 
+        y = y || 0;
+     -->
+
+    <div>
+        arguments是参数的数组
+        <script>
+            x = findMax(1, 123, 500, 115, 44, 88);
+
+            function findMax() {
+                // arguments是参数的数组
+                var i, max = arguments[0];
+
+                if (arguments.length < 2) return max;
+
+                for (i = 0; i < arguments.length; i++) {
+                    if (arguments[i] > max) {
+                        max = arguments[i];
+                    }
+                }
+                return max;
+            }
+            document.getElementById("demo").innerHTML = x;
+        </script>
+    </div>
+
+    <div>
+        js中的构造函数
+        <script>
+            function myFunction(arg1, arg2) {
+                this.firstName = arg1;
+                this.lastName = arg2;
+            }
+            var x = new myFunction("John", "Doe")
+        </script>
+    </div>
+
+    <div>
+        在 JavaScript 中, 函数是对象。JavaScript 函数有它的属性和方法。
+        call() 和 apply() 和bind() 是预定义的函数方法。 两个方法可用于调用函数，两个方法的第一个参数必须是对象本身。
+        改变this的指向 bind是没执行的，call是普通参数，apply是argument(数组)的形式传参
+        <script>
+
+
+            var person2 = { name: "李四", age: 19 }
+
+            function person1Method(name, age) {
+                var name = name
+                var age = age
+                console.log(this, name, age)
+            }
+            person1Method.call(person2, "小岛", 200)
+
+            function person2Method(name, age) {
+                var name = name
+                var age = age
+                console.log(this, name, age)
+            }
+            person2Method.apply(person2, ["小岛", 200])
+        </script>
+    </div>
+
+
+</body>
+
+</html>
