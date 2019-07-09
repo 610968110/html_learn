@@ -142,7 +142,8 @@
                 width: 200px;
                 height: 100px;
                 background-color: gold;
-                transition: width 500ms ease 2ms, height 500ms ease 2ms, background-color 500ms ease 2ms;
+                /* transition: width 500ms ease 2ms, height 500ms ease 2ms, background-color 500ms ease 2ms; */
+                transition: all 500ms ease 2ms;
             }
 
             .long:hover {
@@ -153,6 +154,65 @@
         </style>
         <div class="long">快点我</div>
     </div>
+
+    <div>
+        <style>
+            @keyframes walkingTranslateX {
+                form {
+                    transform: translateX(0px)
+                }
+
+                to {
+                    transform: translateX(1000px)
+                }
+            }
+
+            @keyframes walkingReverse {
+                form {
+                    transform: translateX(0)
+                }
+
+                to {
+                    transform: translateX(1000px)
+                }
+            }
+
+            @keyframes walkingPerson {
+                form {
+                    left: 0px;
+                }
+
+                to {
+                    left: -960px;
+                }
+            }
+
+            .walking {
+                width: 120px;
+                height: 180px;
+                overflow: hidden;
+                position: relative;
+                animation: walkingTranslateX 3s linear 0ms infinite;
+            }
+
+            .walking div {
+                animation: walkingReverse 1s linear 0 reverse;
+            }
+
+            .walking img {
+                animation: walkingPerson 1s steps(8) infinite;
+                position: absolute;
+                left: 0px;
+                top: 0px;
+            }
+        </style>
+        <div class="walking">
+            <div>
+                <img src="walking.png" alt="走路">
+            </div>
+        </div>
+    </div>
+    
 
 </body>
 
