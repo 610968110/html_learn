@@ -58,6 +58,8 @@
                 /* ease:缓冲(非线性运动),*/
                 /* animation: name duration timing-function delay iteration-count direction fill-mode; */
                 animation: rotating 1s linear 0ms infinite normal none;
+                /* 改变中心点 */
+                transform-origin: 10px 10px;
             }
 
             .box1:hover {
@@ -158,22 +160,32 @@
     <div>
         <style>
             @keyframes walkingTranslateX {
-                form {
-                    transform: translateX(0px)
+                0% {
+                    transform: translateX(0px) scaleX(1)
                 }
 
-                to {
-                    transform: translateX(1000px)
-                }
-            }
-
-            @keyframes walkingReverse {
-                form {
-                    transform: translateX(0)
+                24% {
+                    transform: translateX(450px) scaleX(1) translateY(0px)
                 }
 
-                to {
-                    transform: translateX(1000px)
+                25% {
+                    transform: translateX(500px) scaleX(1) translateY(-100px)
+                }
+
+                26% {
+                    transform: translateX(550px) scaleX(1) translateY(0px)
+                }
+
+                49% {
+                    transform: translateX(1000px) scaleX(1)
+                }
+
+                50% {
+                    transform: translateX(1000px) scaleX(-1)
+                }
+
+                100% {
+                    transform: translateX(0px) scaleX(-1)
                 }
             }
 
@@ -192,7 +204,7 @@
                 height: 180px;
                 overflow: hidden;
                 position: relative;
-                animation: walkingTranslateX 3s linear 0ms infinite;
+                animation: walkingTranslateX 6s linear 0ms infinite;
             }
 
             .walking div {
@@ -212,7 +224,59 @@
             </div>
         </div>
     </div>
-    
+
+    <div>
+        <style>
+            .change1 {
+                width: 700px;
+                height: 272px;
+                border: 3px solid #000;
+                margin: 50px auto 0;
+                position: relative;
+                /* 让容器里面的元素按照3d空间显示（规范写法）  */
+                transform-style: preserve-3d;
+            }
+
+            .change1 img {
+                width: 272px;
+                height: auto;
+                position: absolute;
+                left: 200px;
+                top: 0;
+                transform: perspective(800px) rotateY(0deg);
+                transition: all 500ms ease;
+                backface-visibility: hidden;
+            }
+
+            .change1:hover img {
+                transform: perspective(800px) rotateY(180deg);
+            }
+
+            .change1 div {
+                width: 300px;
+                height: 272px;
+                background-color: pink;
+                position: absolute;
+                left: 200px;
+                top: 0;
+                font-size: 20px;
+                text-align: center;
+                line-height: 272px;
+                transform: perspective(800px) rotateY(-180deg);
+                transition: all 500ms ease;
+                backface-visibility: hidden;
+            }
+
+            .change1:hover div {
+                transform: perspective(800px) rotateY(0deg);
+            }
+        </style>
+        <div class="change1">
+            <img src="./img.png" alt="pic">
+            <div>DSB</div>
+        </div>
+    </div>
+
 
 </body>
 

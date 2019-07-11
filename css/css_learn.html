@@ -138,9 +138,11 @@
                 padding: 10px;
                 /* 左右居中 */
                 margin: auto;
+                /* 该属性可以 */
+                box-sizing: border-box;
             }
         </style>
-        <div class="box11">盒子约束</div>
+        <div class="box11">盒子约束，box-sizing解决宽度累加问题</div>
     </div>
 
     <div>
@@ -210,24 +212,36 @@
 
     </div>
 
-    <div>
-        <style>
-            .link11 {
-                width: 50px;
-                height: 50px;
-                background-color: aqua;
-                display: block;
-            }
+    <style>
+        .top {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 100px;
+            background-color: aqua;
+            text-align: center;
+        }
+    </style>
+    <div class="top">粘性定位，必须指定top或left等</div>
+    </div>
 
-            .link11:hover {
-                background-color: aquamarine;
-                /* display: none; */
-                opacity: 0;
-            }
-        </style>
-        <div style="width: 50px; height: 50px;margin:20px auto;">
-            <div class="link11"></div>
-        </div>
+    <style>
+        .link11 {
+            width: 50px;
+            height: 50px;
+            background-color: aqua;
+            display: block;
+        }
+
+        .link11:hover {
+            background-color: aquamarine;
+            /* display: none; */
+            opacity: 0;
+        }
+    </style>
+    <div style="width: 50px; height: 50px;margin:20px auto;">
+        <div class="link11"></div>
+    </div>
     </div>
 
     <div>
@@ -362,6 +376,131 @@
 
     <div>
     </div>
+
+    <div>
+        <style>
+            .select {}
+
+            .select:link {
+                color: aqua;
+            }
+
+            .select:visited {
+                color: crimson;
+            }
+        </style>
+        <a href="http://www.hao123.com" class="select">已访问过的连接变色</a>
+    </div>
+
+    <div>
+        <script>
+            setInterval(() => {
+                getPos()
+            }, 3000);
+            function getPos() {
+                var view = document.getElementById('asd')
+                var box = view.getBoundingClientRect()
+                console.log(box)
+
+            }
+        </script>
+        <style>
+            .pos111 {
+                width: 150px;
+                height: 150px;
+                border: 5px solid black;
+                margin: 20px auto 0px;
+                background-color: gold;
+            }
+        </style>
+        <div class="pos111" id="asd">每秒钟打印我的位置</div>
+    </div>
+
+    <div>
+        <style>
+            .dropdown {
+                position: relative;
+                margin-bottom: 120px;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                padding: 12px 16px;
+                left: 50%;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        </style>
+        <div class="dropdown">
+            <span>鼠标移动到我这显示菜单！</span>
+            <div class="dropdown-content">
+                <p>菜单1</p>
+                <p>带单2</p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <style>
+            body {
+                counter-reset: bigNum;
+            }
+
+            h1 {
+                counter-reset: subNum;
+            }
+
+            h1::before {
+                counter-increment: bigNum;
+                content: counter(bigNum) ". ";
+            }
+
+            h2::before {
+                counter-increment: subNum;
+                content: counter(bigNum) "."counter(subNum);
+            }
+        </style>
+        <h1>java</h1>
+        <h2>面向对象</h2>
+        <h2>封装继承堕胎</h2>
+        <h1>C++</h1>
+        <h2>指针</h2>
+    </div>
+
+    <div>
+        <style>
+            .change div {
+                width: 300px;
+                height: 300px;
+                border: 1px solid rebeccapurple;
+                float: left;
+                margin: 6px;
+                background-color: antiquewhite;
+            }
+
+            /* 响应式布局 - 小于 800 px 时触发  注意空格！！！！！坑！！！！*/
+            /* orientation: landscape */
+            @media screen and (max-width: 800px) {
+                .change div {
+                    width: 800px;
+                    height: 300px;
+                    background-color: goldenrod;
+                }
+            }
+        </style>
+        <div class="change">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
 </body>
 
 </html>

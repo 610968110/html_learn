@@ -1,0 +1,36 @@
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <title>jquery</title>
+</head>
+
+<body style="text-align: center">
+
+    <div>
+        <script>
+            // 等价于 -> $(function () { })
+            $(document).ready(function () {
+                $('p').click(function () {
+                    // $('p').hide()
+                    // $('#id').hide()
+                    $(this).hide()
+                })
+                $("p.p1").click(function () {
+                    $(this).hide()
+                })
+            })
+        </script>
+        <style>
+            .p1 {}
+        </style>
+        <p>你敢点我我就消失给你看</p>
+        <p class="p1">继续点</p>
+    </div>
+
+</body>
+
+</html>
