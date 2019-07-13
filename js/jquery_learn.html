@@ -5,8 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: bisque;
+        }
+
+        body>div {
+            border: 1px solid black;
+            margin-top: 10px;
+            background-color: white;
+        }
+    </style>
+    <!-- jq要放到独立文件中 -->
+    <!-- <script src="my_jquery_functions.js"></script> -->
     <title>jquery</title>
 </head>
+
+<!-- 
+    $("*")	                    选取所有元素	
+    $(this)	                    选取当前 HTML 元素	
+    $("p.intro")	            选取 class 为 intro 的 <p> 元素	
+    $("p:first")	            选取第一个 <p> 元素	
+    $("ul li:first")	        选取第一个 <ul> 元素的第一个 <li> 元素	
+    $("ul li:first-child")	    选取每个 <ul> 元素的第一个 <li> 元素	
+    $("[href]")	选取带有 href    属性的元素	
+    $("a[target='_blank']")	    选取所有 target 属性值等于 "_blank" 的 <a> 元素	
+    $("a[target!='_blank']")	选取所有 target 属性值不等于 "_blank" 的 <a> 元素	
+    $(":button")	            选取所有 type="button" 的 <input> 元素 和 <button> 元素	
+    $("tr:even")	            选取偶数位置的 <tr> 元素
+    $("tr:odd")	                选取奇数位置的 <tr> 元素
+
+    $("#id", ".class")          复合选择器
+    $(div p span)               div下的p元素中的span元素
+    $(div>p)                    div下一级的p元素
+    $(div+p)                    div后面的p元素(仅一个p)
+    $(div~p)                    div后面的所有p元素(同级别)
+    $(.p:last)                  类选择器 加 过滤选择器  第一个和最后一个（first 或者 last）
+    $("#mytable td:odd")        层级选择 加 过滤选择器 奇偶（odd 或者 even）
+    $("div p:eq(2)")            索引选择器 div下的第三个p元素（索引是从0开始）
+    $("a[href='www.baidu.com']")属性选择器
+    $("p:contains(test)")       内容过滤选择器，包含text内容的p元素
+    $(":emtyp")                 内容过滤选择器，所有空标签（不包含子标签和内容的标签）parent 相反
+    $(":hidden")                所有隐藏元素 visible 
+    $("input:enabled")          选取所有启用的表单元素
+    $(":disabled")              所有不可用的元素
+    $("input:checked")          获取所有选中的复选框单选按钮等
+    $("select option:selected") 获取选中的选项元素
+ -->
+
+<!-- 
+     鼠标事件	    键盘事件	     表单事件	    文档/窗口事件
+     click  	   keypress    	  submit	    load
+     dblclick	   keydown	      change	    resize
+     mouseenter	   keyup	      focus	        scroll
+     mouseleave	   blur	          unload
+     hover	 	 	 
+  -->
 
 <body style="text-align: center">
 
@@ -14,21 +68,272 @@
         <script>
             // 等价于 -> $(function () { })
             $(document).ready(function () {
-                $('p').click(function () {
-                    // $('p').hide()
-                    // $('#id').hide()
-                    $(this).hide()
+                $('h1').click(function () {
+                    // $('p').hide() show() toggle();
+                    $(this).hide(1000, "linear", function () {
+                        alert("先弹窗")
+                    }())
                 })
+                // zlass为p1的p标签
                 $("p.p1").click(function () {
-                    $(this).hide()
+                    $(this).hide(1000, "swing", function () {
+                        alert("finish")
+                    })
                 })
             })
         </script>
         <style>
             .p1 {}
         </style>
-        <p>你敢点我我就消失给你看</p>
+        <h1>你敢点我我就消失给你看</h1>
         <p class="p1">继续点</p>
+    </div>
+
+    <div>
+        <script>
+            $(document).ready(function () {
+                $(window).keypress(function (event) {
+                    var v = $("#inputKey")
+                    v.append(event.key)
+                    v.prepend(event.key)
+                    // after 和 before 可以在当前标签前后添加新的标签元素
+                    // remove 删除标签
+                    // empty  删除子元素
+                    // $("p").remove(".italic"); 删除class为italic的p标签
+                })
+            })
+        </script>
+        <div id="inputKey">来按键盘</div>
+    </div>
+
+    <div>
+        <script>
+            $(document).ready(function () {
+                var div1 = $("#div1");
+                $('#btnIn').click(function () {
+                    // fadeToggle
+                    div1.fadeIn()
+                })
+                $('#btnOut').click(function () {
+                    div1.fadeOut(2000, "linear", function () {
+                        alert("finish")
+                    })
+                })
+                $('#btnAnim').click(function () {
+                    div1.animate({
+                        opacity: '-=0.2',
+                        width: '-=20px',
+                        // toggle
+                        height: '-=20px'
+                    })
+                })
+                $('#btnAnim1').click(function () {
+                    // jQuery.queue  jQuery.fn.queue
+                    div1.animate({ height: '300px', opacity: '0.4' }, "slow")
+                        .animate({ width: '300px', opacity: '0.8' }, "slow")
+                        .animate({ height: '100px', opacity: '0.4' }, "slow")
+                        .animate({ width: '100px', opacity: '0.8' }, "slow")
+                })
+                $('#btnAnim2').click(function () {
+                    div1.css("background-color", "gold")
+                        .slideUp(1000)
+                        .slideDown(1000)
+                })
+                $('#btnStop').click(function () {
+                    div1.stop()
+                })
+                $('#btnStop1').click(function () {
+                    div1.stop(true)
+                })
+                $('#btnStop2').click(function () {
+                    div1.stop(true, true)
+                })
+            });
+        </script>
+        <button id="btnIn">淡入</button>
+        <button id="btnOut">淡出</button>
+        <button id="btnAnim">动画</button>
+        <button id="btnAnim1">动画1</button>
+        <button id="btnAnim2">动画2</button>
+        <button id="btnStop">停止动画</button>
+        <button id="btnStop1">停止全部动画</button>
+        <button id="btnStop2">停止全部动画并完成动画</button>
+        <!-- 被立即停止的动画不会触发回调，被立即完成的动画会触发回调。 -->
+        <div id="div1" style="width: 100px;height:100px;background-color: aqua; margin: 0 auto 0;"></div>
+    </div>
+
+    <div>slideDown() slideUp() slideToggle() 下滑</div>
+    <div>
+        <script>
+            $(document).ready(function () {
+                $('#btn2').click(function () {
+                    $('#div2').text(function (index, oldT) {
+                        return "index -> " + index + "  , oldT -> " + oldT
+                    })
+                })
+            });
+        </script>
+        <button id="btn2">设置text()文本时可以获取旧文本</button>
+        <div id="div2">旧文本</div>
+    </div>
+
+    <div>
+        <script>
+            $(document).ready(function () {
+                $('#btn3').click(function () {
+                    $('#a1').attr({ "href": "http://www.google.com" })
+                })
+            });
+        </script>
+        <button id="btn3">改变地址</button>
+        <a id="a1" href="http://www.baidu.com">你猜我是百度还是google</a>
+    </div>
+    <div>
+        <style>
+            .style1 {
+                color: red;
+            }
+
+            .style2 {
+                font-size: 30px;
+            }
+        </style>
+        <script>
+            $(document).ready(function () {
+                $('#btn4').click(function () {
+                    $('#div5').addClass('style1 style2')
+                })
+                $('#btn5').click(function () {
+                    $('#div5').removeClass('style1')
+                })
+                $('#btn6').click(function () {
+                    $('#div5').toggleClass('style1 style2')
+                })
+            });
+        </script>
+        <button id="btn4">添加css 1、2</button>
+        <button id="btn5">移除css 1</button>
+        <button id="btn6">切换css</button>
+        <div id="div5">123</div>
+    </div>
+
+    <div>
+        <div id="div10" style="color: red">用css()获取或设置我的属性，比如颜色</div>
+        <button id="btn10">获取</button>
+        <button id="btn10_1">设置</button>
+        <button id="btn10_2">设置多种</button>
+        <script>
+            $('#btn10').click(function () {
+                alert($('#div10').css('color'))
+            })
+            $('#btn10_1').click(function () {
+                $('#div10').css('color', '#00ff00')
+            })
+            $('#btn10_2').click(function () {
+                $('#div10').css({ 'color': '#ffff00', 'font-size': '20px' })
+            })
+        </script>
+    </div>
+
+    <div>
+        <style>
+            .parrentBox * {
+                border: 1px solid black;
+                padding: 5px;
+                display: block;
+            }
+        </style>
+        <script>
+            $(function () {
+                $('#btn11_1').click(function () {
+                    $('#span11').parent().css('border', '2px solid red')
+                })
+                $('#btn11_2').click(function () {
+                    $('#span11').parents().css('border', '2px solid red')
+                })
+                $('#btn11_3').click(function () {
+                    $('#span11').parents('ul').css('border', '2px solid red')
+                })
+                $('#btn11_4').click(function () {
+                    $('#span11').parentsUntil('ul').css('border', '2px solid red')
+                })
+                $('#btn11_5').click(function () {
+                    $('#ul11').children().css('border', '2px solid red')
+                })
+                $('#btn11_6').click(function () {
+                    $('#ul11').find('span').css('border', '2px solid red')
+                })
+            })
+        </script>
+        <div class='parrentBox' style="padding: 10px;">
+            <div style="width: 200px;height: 200px; margin: auto">
+                div
+                <ul id="ul11">
+                    ul
+                    <li>
+                        li
+                        <span id="span11">span</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        父元素
+        <button id="btn11_1">parent</button>
+        <button id="btn11_2">parents</button>
+        <button id="btn11_3">parents('ul')</button>
+        <button id="btn11_4">parentsUntil('ul') 在ul之间的</button>
+        子元素
+        <button id="btn11_5">children()，一个子元素，children(标签.class)，匹配class的标签元素</button>
+        <button id="btn11_6">find(span) span子元素 * 全部子元素</button>
+        </br> 同胞元素:
+        </br>siblings() 除了自己的同级元素
+        </br> siblings('p') 除了自己的同级p元素
+        </br>next() 下一个同级元素
+        </br>nextAll()自己后面所有的同级元素
+        </br>nextUntil(p) 自己后面一直到p标签不包括p
+        </br>prev(), prevAll() & prevUntil() 是向上
+    </div>
+
+    <div>
+        <style>
+            .xxx {}
+        </style>
+        <script>
+            $(function () {
+                $('p').eq(1).css('background-color', '#00ff00')
+                // $('p.xxx').css('background-color', '#00ff00')
+                $('p').filter('.xxx').css('background-color', '#00ff00')
+            })
+        </script>
+        <p class="xxx">用.eq设置背景色</p>
+        <p class="xxx">用.filter .not 设置背景色</p>
+    </div>
+
+    <div>
+        <script>
+            $(function () {
+                $('#btn12').click(function () {
+                    // $('#p12').load('./test.txt')
+                    $('#p12').load('./test.txt', function (responseTxt, textStatus, jqXHR) {
+                        alert(responseTxt + "   " + textStatus + "   " + jqXHR.status)
+                    })
+                })
+            })
+        </script>
+        <button id="btn12">加载本地内容,谷歌浏览器不行，跨域了，可以用火狐浏览器测试~</button>
+        </br>
+        $('#p12').load('./test.txt #id') 可以加载test.txt中相应id的标签内容
+        <p id="p12"></p>
+    </div>
+
+    <div>
+        <button>jsonp解决跨域问题，解析json用 var obj = parse(json) , 生生json用 var myJSON = JSON.stringify(obj);</button>
+        </br>
+        $.getJSON("./test.txt",
+        function (data, textStatus, jqXHR) {
+        alert(data + " " + textStatus + " " + jqXHR.status)
+        }
+        );
     </div>
 
 </body>

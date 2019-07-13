@@ -1,0 +1,301 @@
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <title>VUE</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        body>div {
+            border: 1px solid black;
+            margin: 10px auto 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div id="div1">
+            <p>{{text}}</p>
+        </div>
+        <script>
+            new Vue({
+                el: "#div1",
+                data: {
+                    text: "简单绑定~"
+                }
+            })
+        </script>
+    </div>
+
+    <div>
+        <div id="div2">
+            <p>{{text1}}</p>
+            <p>{{text2}}</p>
+        </div>
+        <script>
+            var other = { text1: "多文本绑定1~", text2: "多文本绑定2~" }
+            new Vue({
+                el: "#div2",
+                data: other
+            })
+        </script>
+    </div>
+
+    <div>
+        <div id="div3">
+            <p>{{m()}}</p>
+        </div>
+        <script>
+            new Vue({
+                el: "#div3",
+                data: {
+                    other: "--> "
+                },
+                methods: {
+                    m: function () {
+                        return this.other + "函数返回文本"
+                    }
+                },
+            })
+        </script>
+    </div>
+
+    <div>
+        <div id="div4">
+            <p>{{equals()}}</p>
+        </div>
+        <script>
+            new Vue({
+                el: "#div4",
+                methods: {
+                    equals: function () {
+                        var view = document.getElementById("div4")
+                        return "用$符号比较 (document.getElementById === this.$el) 的结果是 -> " + (view === this.$el)
+                    }
+                }
+            })
+        </script>
+    </div>
+
+    <div>
+        <div id="div5">
+            <div v-html="message"></div>
+        </div>
+        <script>
+            new Vue({
+                el: "#div5",
+                data: {
+                    message: '<h3>用 v-html 添加html属性的标签</h3>'
+                }
+            })
+        </script>
+    </div>
+
+    <div>
+        <style>
+            .box {
+                color: gold;
+            }
+
+            .box1 {
+                font-size: 30px;
+            }
+        </style>
+        <div id="div6">
+            <!-- 绑定id，点击时相当于点击id控件 -->
+            <label for="s1">样式一</label><input id="s1" type="checkbox" v-model="useBox">
+            <label for="s2">样式二</label><input id="s" type="checkbox" v-model="useBox1">
+            <div v-bind:class="{'box':useBox, 'box1':useBox1}">用 v-bind +属性 绑定属性, v-model 控制响应式属性</div>
+        </div>
+        <script>
+            new Vue({
+                el: "#div6",
+                data: {
+                    useBox: true,
+                    useBox1: false
+                }
+            })
+        </script>
+    </div>
+
+    <div>
+        <div id="div7">
+            <button v-on:click="seen=!seen">控制显示和隐藏</button>
+            <p v-if="seen">能看见我嘛</p>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: "#div7",
+                data: {
+                    seen: true
+                },
+            })
+        </script>
+    </div>
+
+    <div>
+        动态展示多行，用for循环解决
+        <div id="div8">
+            <button v-on:click="array.push({content:'???'})">点我增加行数</button>
+            <button v-on:click="array.pop()">点我删除行数</button>
+            <p v-for="(item, index) in array" :key="index">{{index +" -> "+item.content}}</p>
+        </div>
+        <script>
+            var vm1 = new Vue({
+                el: "#div8",
+                data: {
+                    array: [{ content: "A" }, { content: "B" }]
+                }
+            })
+        </script>
+    </div>
+
+    <div>
+        <div id="div9">
+            <p>{{message}}</p>
+            <input type="text" v-model="message" placeholder="用 v-model 实现单向绑定">
+        </div>
+        <script>
+            new Vue({
+                el: "#div9",
+                data: {
+                    message: ""
+                }
+            })
+        </script>
+    </div>
+
+    <div>
+        自定义标签
+        <div id="div10">
+            <!-- 省略 v-bind -->
+            <mytest :content="{text:'我是传进来的数据'}"></mytest>
+        </div>
+        <script>
+            Vue.component("mytest", {
+                props: ['content'],
+                template: "<h1>{{content.text}}</h1>"
+            })
+            new Vue({
+                el: "#div10"
+            })
+        </script>
+    </div>
+
+    <div>
+        自定义标签1
+        <div id="div11">
+            <mytest1 v-for="item in array1" :key="item.id" :content="item"></mytest1>
+            </mytest1>
+        </div>
+        <script>
+            Vue.component("mytest1", {
+                props: ['content'],
+                template: "<li style='list-style:none'>{{content.id +' -> '+content.text}}</li>"
+            })
+            new Vue({
+                el: "#div11",
+                data: {
+                    array1: [{ id: 0, text: "A" }, { id: 1, text: "B" }]
+                }
+            })
+        </script>
+    </div>
+
+    <div>
+        <div id="div12">
+            <input type="text" v-model="list.content" placeholder="添加监听回调">
+        </div>
+        <script>
+            var list = { content: "" }
+            var vm12 = new Vue({
+                el: "#div12",
+                data: list
+            })
+            vm12.$watch("content", function (newContent, oldContent) {
+                alert("oldContent -> " + oldContent + " , newContent -> " + newContent)
+            })
+        </script>
+    </div>
+
+    <div>
+        <p>
+            生命和周期
+            </br>
+            在实例生命周期的不同阶段被调用，如 beforeCreate、created、beforeMount、mounted、beforeUpdate、updated 和 beforeDestroy、destroyed。
+            </br>
+            生命周期钩子的 this 上下文指向调用它的 Vue 实例。
+        </p>
+    </div>
+
+    <div>
+        <div id="div13">
+            <button v-on:click="text++">点我，也不能改变哦~~</button>
+            <p v-once>{{text}}</p>
+        </div>
+        <script>
+            var i = 0
+            new Vue({
+                el: "#div13",
+                data: {
+                    text: i
+                }
+            })
+        </script>
+    </div>
+
+    <div>
+        <div id="div14">
+            <p :id="test">直接获取 -> {{getContent()}}</p>
+            <button @click='getContent'>点击获取</button>
+        </div>
+        <script>
+            new Vue({
+                el: "#div14",
+                data: {
+                    test: 'abc'
+                },
+                methods: {
+                    getContent() {
+                        var a = document.getElementById(this.test)
+                        console.log(a)
+                        return a
+                    }
+                }
+            })
+        </script>
+    </div>
+
+    <div>
+        响应式依赖
+        <div id="div15">
+            <button @Click="now">{{date}}</button>
+        </div>
+        <script>
+            function getDate() {
+                return Date.now()
+            }
+            new Vue({
+                el: "#div15",
+                data: {
+                    date: getDate()
+                },
+                methods: {
+                    now() {
+                        return this.date = getDate()
+                    }
+                }
+            })
+        </script>
+    </div>
+
+
+</body>
+
+</html>

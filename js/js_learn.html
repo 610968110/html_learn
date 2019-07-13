@@ -58,6 +58,7 @@
             function changeColor(view) {
                 if (i % 2 == 0) {
                     view.style.color = '#00ff00'
+                    // view.style['color'] = '#00ff00'
                 } else {
                     view.style.color = '#00ffff'
                 }
@@ -528,13 +529,23 @@
         location.assign(url)    加载新的文档。
      -->
 
-     <div>循环计时事件 -> var task = setInterval(function(){alert("Hello")},3000)  clearInterval(task)停止</div>
-     <div>延时时间事件 -> var task = setTimeout(function(){alert("Hello")},3000)  clearTimeout(task)停止</div>
-     <h4 style="text-align: center">Cookie</h4>
-     <div>创建 -> document.cookie="username=John; time=20190103;"</div>
-     <div>设置过期时间 -> document.cookie="username=John; expires=Thu, 18 Dec 2043 12:00:00 GMT";</div>
-     <div>以使用 path 参数告诉浏览器 cookie 的路径。默认情况下，cookie 属于当前页面。 -> document.cookie="username=John Doe; expires=Thu, 18 Dec 2043 12:00:00 GMT; path=/";</div>
-     <div>删除cookie -> 设置过期时间即可</div>
+    <div>
+        <p id="p100"></p>
+        <script>
+                (function mm() {
+                    document.getElementById('p100').innerHTML = '获取网页参数值 -> ' + window.location.search
+                })()
+        </script>
+    </div>
+
+    <div>循环计时事件 -> var task = setInterval(function(){alert("Hello")},3000) clearInterval(task)停止</div>
+    <div>延时时间事件 -> var task = setTimeout(function(){alert("Hello")},3000) clearTimeout(task)停止</div>
+    <h4 style="text-align: center">Cookie</h4>
+    <div>创建 -> document.cookie="username=John; time=20190103;"</div>
+    <div>设置过期时间 -> document.cookie="username=John; expires=Thu, 18 Dec 2043 12:00:00 GMT";</div>
+    <div>以使用 path 参数告诉浏览器 cookie 的路径。默认情况下，cookie 属于当前页面。 -> document.cookie="username=John Doe; expires=Thu, 18 Dec
+        2043 12:00:00 GMT; path=/";</div>
+    <div>删除cookie -> 设置过期时间即可</div>
 </body>
 
 </html>
